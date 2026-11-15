@@ -77,8 +77,10 @@ Os mapas gerados ficam salvos no diretório `output/mapa_rotas_otimizadas_Territ
 ## 📁 Estrutura do Repositório
 
 ```text
+├── assets/                      # Imagens e comparativos visuais
 ├── dados/                       # Datasets históricos originais
-├── rtm_core/                    # Pacote Python profissional
+├── notebooks/                   # Notebooks de análise exploratória e estudos legados
+├── rtm_core/                    # Pacote Python profissional refatorado
 │   ├── config.py                # Configurações globais e caminhos dinâmicos (pathlib)
 │   ├── data_loader.py           # Ingestão, tipagem e higienização geoespacial
 │   ├── geo_utils.py             # Funções de cálculo geodésico (Haversine vetorizado)
