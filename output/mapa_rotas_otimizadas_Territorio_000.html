@@ -1,0 +1,2871 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2ee1013f702f6cedccffdae85c67292b {
+                    position: relative;
+                    width: 100.0vw;
+                    height: 100.0vh;
+
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>/*
+ * Glyphicons Halflings -- the icon font used by folium's default Awesome Markers
+ * (Icon(prefix="glyphicon")). Extracted from Bootstrap 3's glyphicon rules only.
+ *
+ * folium previously loaded netdna's bootstrap-glyphicons.css, which despite its
+ * name ships a full Bootstrap-3 base stylesheet (normalize reset + global `body`
+ * rules) that leaked onto the host page (GH-1820). This file provides just the
+ * @font-face and .glyphicon/.glyphicon-* rules needed for the markers, with no
+ * page-wide side effects. Font files are served from jsDelivr.
+ */
+@font-face{font-family:'Glyphicons Halflings';src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot');src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;}
+.glyphicon-asterisk:before{content:"\2a";}
+.glyphicon-plus:before{content:"\2b";}
+.glyphicon-euro:before{content:"\20ac";}
+.glyphicon-minus:before{content:"\2212";}
+.glyphicon-cloud:before{content:"\2601";}
+.glyphicon-envelope:before{content:"\2709";}
+.glyphicon-pencil:before{content:"\270f";}
+.glyphicon-glass:before{content:"\e001";}
+.glyphicon-music:before{content:"\e002";}
+.glyphicon-search:before{content:"\e003";}
+.glyphicon-heart:before{content:"\e005";}
+.glyphicon-star:before{content:"\e006";}
+.glyphicon-star-empty:before{content:"\e007";}
+.glyphicon-user:before{content:"\e008";}
+.glyphicon-film:before{content:"\e009";}
+.glyphicon-th-large:before{content:"\e010";}
+.glyphicon-th:before{content:"\e011";}
+.glyphicon-th-list:before{content:"\e012";}
+.glyphicon-ok:before{content:"\e013";}
+.glyphicon-remove:before{content:"\e014";}
+.glyphicon-zoom-in:before{content:"\e015";}
+.glyphicon-zoom-out:before{content:"\e016";}
+.glyphicon-off:before{content:"\e017";}
+.glyphicon-signal:before{content:"\e018";}
+.glyphicon-cog:before{content:"\e019";}
+.glyphicon-trash:before{content:"\e020";}
+.glyphicon-home:before{content:"\e021";}
+.glyphicon-file:before{content:"\e022";}
+.glyphicon-time:before{content:"\e023";}
+.glyphicon-road:before{content:"\e024";}
+.glyphicon-download-alt:before{content:"\e025";}
+.glyphicon-download:before{content:"\e026";}
+.glyphicon-upload:before{content:"\e027";}
+.glyphicon-inbox:before{content:"\e028";}
+.glyphicon-play-circle:before{content:"\e029";}
+.glyphicon-repeat:before{content:"\e030";}
+.glyphicon-refresh:before{content:"\e031";}
+.glyphicon-list-alt:before{content:"\e032";}
+.glyphicon-flag:before{content:"\e034";}
+.glyphicon-headphones:before{content:"\e035";}
+.glyphicon-volume-off:before{content:"\e036";}
+.glyphicon-volume-down:before{content:"\e037";}
+.glyphicon-volume-up:before{content:"\e038";}
+.glyphicon-qrcode:before{content:"\e039";}
+.glyphicon-barcode:before{content:"\e040";}
+.glyphicon-tag:before{content:"\e041";}
+.glyphicon-tags:before{content:"\e042";}
+.glyphicon-book:before{content:"\e043";}
+.glyphicon-print:before{content:"\e045";}
+.glyphicon-font:before{content:"\e047";}
+.glyphicon-bold:before{content:"\e048";}
+.glyphicon-italic:before{content:"\e049";}
+.glyphicon-text-height:before{content:"\e050";}
+.glyphicon-text-width:before{content:"\e051";}
+.glyphicon-align-left:before{content:"\e052";}
+.glyphicon-align-center:before{content:"\e053";}
+.glyphicon-align-right:before{content:"\e054";}
+.glyphicon-align-justify:before{content:"\e055";}
+.glyphicon-list:before{content:"\e056";}
+.glyphicon-indent-left:before{content:"\e057";}
+.glyphicon-indent-right:before{content:"\e058";}
+.glyphicon-facetime-video:before{content:"\e059";}
+.glyphicon-picture:before{content:"\e060";}
+.glyphicon-map-marker:before{content:"\e062";}
+.glyphicon-adjust:before{content:"\e063";}
+.glyphicon-tint:before{content:"\e064";}
+.glyphicon-edit:before{content:"\e065";}
+.glyphicon-share:before{content:"\e066";}
+.glyphicon-check:before{content:"\e067";}
+.glyphicon-move:before{content:"\e068";}
+.glyphicon-step-backward:before{content:"\e069";}
+.glyphicon-fast-backward:before{content:"\e070";}
+.glyphicon-backward:before{content:"\e071";}
+.glyphicon-play:before{content:"\e072";}
+.glyphicon-pause:before{content:"\e073";}
+.glyphicon-stop:before{content:"\e074";}
+.glyphicon-forward:before{content:"\e075";}
+.glyphicon-fast-forward:before{content:"\e076";}
+.glyphicon-step-forward:before{content:"\e077";}
+.glyphicon-eject:before{content:"\e078";}
+.glyphicon-chevron-left:before{content:"\e079";}
+.glyphicon-chevron-right:before{content:"\e080";}
+.glyphicon-plus-sign:before{content:"\e081";}
+.glyphicon-minus-sign:before{content:"\e082";}
+.glyphicon-remove-sign:before{content:"\e083";}
+.glyphicon-ok-sign:before{content:"\e084";}
+.glyphicon-question-sign:before{content:"\e085";}
+.glyphicon-info-sign:before{content:"\e086";}
+.glyphicon-screenshot:before{content:"\e087";}
+.glyphicon-remove-circle:before{content:"\e088";}
+.glyphicon-ok-circle:before{content:"\e089";}
+.glyphicon-ban-circle:before{content:"\e090";}
+.glyphicon-arrow-left:before{content:"\e091";}
+.glyphicon-arrow-right:before{content:"\e092";}
+.glyphicon-arrow-up:before{content:"\e093";}
+.glyphicon-arrow-down:before{content:"\e094";}
+.glyphicon-share-alt:before{content:"\e095";}
+.glyphicon-resize-full:before{content:"\e096";}
+.glyphicon-resize-small:before{content:"\e097";}
+.glyphicon-exclamation-sign:before{content:"\e101";}
+.glyphicon-gift:before{content:"\e102";}
+.glyphicon-leaf:before{content:"\e103";}
+.glyphicon-eye-open:before{content:"\e105";}
+.glyphicon-eye-close:before{content:"\e106";}
+.glyphicon-warning-sign:before{content:"\e107";}
+.glyphicon-plane:before{content:"\e108";}
+.glyphicon-random:before{content:"\e110";}
+.glyphicon-comment:before{content:"\e111";}
+.glyphicon-magnet:before{content:"\e112";}
+.glyphicon-chevron-up:before{content:"\e113";}
+.glyphicon-chevron-down:before{content:"\e114";}
+.glyphicon-retweet:before{content:"\e115";}
+.glyphicon-shopping-cart:before{content:"\e116";}
+.glyphicon-folder-close:before{content:"\e117";}
+.glyphicon-folder-open:before{content:"\e118";}
+.glyphicon-resize-vertical:before{content:"\e119";}
+.glyphicon-resize-horizontal:before{content:"\e120";}
+.glyphicon-hdd:before{content:"\e121";}
+.glyphicon-bullhorn:before{content:"\e122";}
+.glyphicon-certificate:before{content:"\e124";}
+.glyphicon-thumbs-up:before{content:"\e125";}
+.glyphicon-thumbs-down:before{content:"\e126";}
+.glyphicon-hand-right:before{content:"\e127";}
+.glyphicon-hand-left:before{content:"\e128";}
+.glyphicon-hand-up:before{content:"\e129";}
+.glyphicon-hand-down:before{content:"\e130";}
+.glyphicon-circle-arrow-right:before{content:"\e131";}
+.glyphicon-circle-arrow-left:before{content:"\e132";}
+.glyphicon-circle-arrow-up:before{content:"\e133";}
+.glyphicon-circle-arrow-down:before{content:"\e134";}
+.glyphicon-globe:before{content:"\e135";}
+.glyphicon-tasks:before{content:"\e137";}
+.glyphicon-filter:before{content:"\e138";}
+.glyphicon-fullscreen:before{content:"\e140";}
+.glyphicon-dashboard:before{content:"\e141";}
+.glyphicon-heart-empty:before{content:"\e143";}
+.glyphicon-link:before{content:"\e144";}
+.glyphicon-phone:before{content:"\e145";}
+.glyphicon-usd:before{content:"\e148";}
+.glyphicon-gbp:before{content:"\e149";}
+.glyphicon-sort:before{content:"\e150";}
+.glyphicon-sort-by-alphabet:before{content:"\e151";}
+.glyphicon-sort-by-alphabet-alt:before{content:"\e152";}
+.glyphicon-sort-by-order:before{content:"\e153";}
+.glyphicon-sort-by-order-alt:before{content:"\e154";}
+.glyphicon-sort-by-attributes:before{content:"\e155";}
+.glyphicon-sort-by-attributes-alt:before{content:"\e156";}
+.glyphicon-unchecked:before{content:"\e157";}
+.glyphicon-expand:before{content:"\e158";}
+.glyphicon-collapse-down:before{content:"\e159";}
+.glyphicon-collapse-up:before{content:"\e160";}
+.glyphicon-log-in:before{content:"\e161";}
+.glyphicon-flash:before{content:"\e162";}
+.glyphicon-log-out:before{content:"\e163";}
+.glyphicon-new-window:before{content:"\e164";}
+.glyphicon-record:before{content:"\e165";}
+.glyphicon-save:before{content:"\e166";}
+.glyphicon-open:before{content:"\e167";}
+.glyphicon-saved:before{content:"\e168";}
+.glyphicon-import:before{content:"\e169";}
+.glyphicon-export:before{content:"\e170";}
+.glyphicon-send:before{content:"\e171";}
+.glyphicon-floppy-disk:before{content:"\e172";}
+.glyphicon-floppy-saved:before{content:"\e173";}
+.glyphicon-floppy-remove:before{content:"\e174";}
+.glyphicon-floppy-save:before{content:"\e175";}
+.glyphicon-floppy-open:before{content:"\e176";}
+.glyphicon-credit-card:before{content:"\e177";}
+.glyphicon-transfer:before{content:"\e178";}
+.glyphicon-cutlery:before{content:"\e179";}
+.glyphicon-header:before{content:"\e180";}
+.glyphicon-compressed:before{content:"\e181";}
+.glyphicon-earphone:before{content:"\e182";}
+.glyphicon-phone-alt:before{content:"\e183";}
+.glyphicon-tower:before{content:"\e184";}
+.glyphicon-stats:before{content:"\e185";}
+.glyphicon-sd-video:before{content:"\e186";}
+.glyphicon-hd-video:before{content:"\e187";}
+.glyphicon-subtitles:before{content:"\e188";}
+.glyphicon-sound-stereo:before{content:"\e189";}
+.glyphicon-sound-dolby:before{content:"\e190";}
+.glyphicon-sound-5-1:before{content:"\e191";}
+.glyphicon-sound-6-1:before{content:"\e192";}
+.glyphicon-sound-7-1:before{content:"\e193";}
+.glyphicon-copyright-mark:before{content:"\e194";}
+.glyphicon-registration-mark:before{content:"\e195";}
+.glyphicon-cloud-download:before{content:"\e197";}
+.glyphicon-cloud-upload:before{content:"\e198";}
+.glyphicon-tree-conifer:before{content:"\e199";}
+.glyphicon-tree-deciduous:before{content:"\e200";}
+.glyphicon-briefcase:before{content:"\1f4bc";}
+.glyphicon-calendar:before{content:"\1f4c5";}
+.glyphicon-pushpin:before{content:"\1f4cc";}
+.glyphicon-paperclip:before{content:"\1f4ce";}
+.glyphicon-camera:before{content:"\1f4f7";}
+.glyphicon-lock:before{content:"\1f512";}
+.glyphicon-bell:before{content:"\1f514";}
+.glyphicon-bookmark:before{content:"\1f516";}
+.glyphicon-fire:before{content:"\1f525";}
+.glyphicon-wrench:before{content:"\1f527";}
+</style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    
+            
+        
+</head>
+<body>
+    
+    
+    <div style="
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+        background: rgba(15, 23, 42, 0.88);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 14px;
+        padding: 16px 20px;
+        color: #f8fafc;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        min-width: 250px;
+        pointer-events: auto;
+    ">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+            <span style="display: inline-block; width: 10px; height: 10px; background: #00e676; border-radius: 50%; box-shadow: 0 0 10px #00e676;"></span>
+            <div style="font-size: 13px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; color: #f8fafc;">RTM ROUTE OPTIMIZER</div>
+        </div>
+        <div style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">Territorio_000 &bull; Ambato, Equador</div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+            <div style="background: rgba(255,255,255,0.05); padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                <div style="color: #94a3b8; font-size: 10px; text-transform: uppercase; font-weight: 600;">Lojas Atendidas</div>
+                <div style="font-size: 18px; font-weight: 800; color: #38bdf8;">68</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                <div style="color: #94a3b8; font-size: 10px; text-transform: uppercase; font-weight: 600;">Circuito Médio</div>
+                <div style="font-size: 18px; font-weight: 800; color: #4ade80;">~10 km/dia</div>
+            </div>
+        </div>
+        <div style="font-size: 11px; color: #64748b; line-height: 1.4;">
+            Algoritmo: TSP (2-Opt) + Capacitated Clustering<br>
+            <span style="color: #00f2fe;">&#9679;</span> Segunda &bull; 
+            <span style="color: #00e676;">&#9679;</span> Terça &bull; 
+            <span style="color: #ffb300;">&#9679;</span> Quarta &bull; 
+            <span style="color: #c084fc;">&#9679;</span> Quinta &bull; 
+            <span style="color: #ff3366;">&#9679;</span> Sexta
+        </div>
+    </div>
+
+    <style>
+        /* Estilização Dark Glassmorphism do Painel de Camadas Folium */
+        .leaflet-control-layers {
+            background: rgba(15, 23, 42, 0.90) !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 12px !important;
+            color: #f8fafc !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+            padding: 12px 16px !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6) !important;
+        }
+        .leaflet-control-layers-base label,
+        .leaflet-control-layers-overlays label {
+            color: #f8fafc !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            margin-bottom: 6px !important;
+            cursor: pointer !important;
+        }
+        .leaflet-control-layers input[type="checkbox"], 
+        .leaflet-control-layers input[type="radio"] {
+            accent-color: #00f2fe !important;
+            cursor: pointer !important;
+        }
+        .leaflet-popup-content-wrapper {
+            background: #0f172a !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 8px !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7) !important;
+        }
+        .leaflet-popup-content {
+            margin: 0 !important;
+            line-height: 1.4 !important;
+        }
+        .leaflet-popup-tip {
+            background: #0f172a !important;
+        }
+    </style>
+    
+    
+            <div class="folium-map" id="map_2ee1013f702f6cedccffdae85c67292b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_2ee1013f702f6cedccffdae85c67292b = L.map(
+                "map_2ee1013f702f6cedccffdae85c67292b",
+                {
+                    center: [-2.22075691726103, -80.89751406681955],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_2ee1013f702f6cedccffdae85c67292b);
+
+            
+
+        
+    
+            var tile_layer_78727e0eaf7377ba05d050d9dcc12aff = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Tiles \u0026copy; Esri \u0026mdash; Dark Gray Canvas",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_78727e0eaf7377ba05d050d9dcc12aff.addTo(map_2ee1013f702f6cedccffdae85c67292b);
+        
+    
+            var tile_layer_e782f87538a474d91b025c8bb9743835 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri Labels",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e782f87538a474d91b025c8bb9743835.addTo(map_2ee1013f702f6cedccffdae85c67292b);
+        
+    
+            var marker_c1c1ebb15284bebcaa9d1a1d76fb3975 = L.marker(
+                [-2.22075691726103, -80.89751406681955],
+                {
+}
+            ).addTo(map_2ee1013f702f6cedccffdae85c67292b);
+        
+    
+            var icon_225187963f3d188e9a519416f3d51dfa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "#ffb300",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_158e37330611538398ddea1e68f749fc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_09b99b4a5ea88005246cd10d8b446730 = $(`<div id="html_09b99b4a5ea88005246cd10d8b446730" style="width: 100.0%; height: 100.0%;"><b>BASE OPERACIONAL:</b> Territorio_000</div>`)[0];
+                popup_158e37330611538398ddea1e68f749fc.setContent(html_09b99b4a5ea88005246cd10d8b446730);
+            
+        
+
+        marker_c1c1ebb15284bebcaa9d1a1d76fb3975.bindPopup(popup_158e37330611538398ddea1e68f749fc)
+        ;
+
+        
+    
+    
+            marker_c1c1ebb15284bebcaa9d1a1d76fb3975.bindTooltip(
+                `<div>
+                     Ponto de Partida / Centróide do Vendedor
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_c1c1ebb15284bebcaa9d1a1d76fb3975.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_c1c1ebb15284bebcaa9d1a1d76fb3975.setIcon(icon_225187963f3d188e9a519416f3d51dfa);
+            
+    
+            var circle_marker_c7aba61b1c49612f704b91ee31939c0c = L.circleMarker(
+                [-2.22075691726103, -80.89751406681955],
+                {"bubblingMouseEvents": true, "color": "#ffb300", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14, "stroke": true, "weight": 2}
+            ).addTo(map_2ee1013f702f6cedccffdae85c67292b);
+        
+    
+            circle_marker_c7aba61b1c49612f704b91ee31939c0c.bindTooltip(
+                `<div>
+                     Raio Central da Base
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var feature_group_95d048f7dc236bcec5eb209d86891354 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_aaf51fa8751a8dfb55b978ae81afe088 = L.circleMarker(
+                [-2.14196253333, -80.7754318],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00f2fe", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_95d048f7dc236bcec5eb209d86891354);
+        
+    
+        var popup_c5856e28eb67aff7bdba3a37af8889f9 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2430b01a0c17462bc40aba9b26b7497f = $(`<div id="html_2430b01a0c17462bc40aba9b26b7497f" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00f2fe; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 1 &bull; SEG                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12296947</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00f2fe; font-weight: 700;">$3,423.75</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_c5856e28eb67aff7bdba3a37af8889f9.setContent(html_2430b01a0c17462bc40aba9b26b7497f);
+            
+        
+
+        circle_marker_aaf51fa8751a8dfb55b978ae81afe088.bindPopup(popup_c5856e28eb67aff7bdba3a37af8889f9)
+        ;
+
+        
+    
+    
+            circle_marker_aaf51fa8751a8dfb55b978ae81afe088.bindTooltip(
+                `<div>
+                     Parada 1: POC 12296947
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_24ad99e612a39ffadcbebf869da32949 = L.circleMarker(
+                [-2.14052103333, -80.77599353333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00f2fe", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_95d048f7dc236bcec5eb209d86891354);
+        
+    
+        var popup_122dbbeb58f3d056b14058095072d8da = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_39e7c0e0e17e03f157cfe5bf90918e5f = $(`<div id="html_39e7c0e0e17e03f157cfe5bf90918e5f" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00f2fe; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 2 &bull; SEG                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895586</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00f2fe; font-weight: 700;">$2,388.38</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_122dbbeb58f3d056b14058095072d8da.setContent(html_39e7c0e0e17e03f157cfe5bf90918e5f);
+            
+        
+
+        circle_marker_24ad99e612a39ffadcbebf869da32949.bindPopup(popup_122dbbeb58f3d056b14058095072d8da)
+        ;
+
+        
+    
+    
+            circle_marker_24ad99e612a39ffadcbebf869da32949.bindTooltip(
+                `<div>
+                     Parada 2: POC 11895586
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2deb7f8f3741c4d4e7a5289dd718e0f1 = L.circleMarker(
+                [-2.13861125, -80.7746226],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00f2fe", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_95d048f7dc236bcec5eb209d86891354);
+        
+    
+        var popup_b91e3c3de374737e2b741f0d5a437f6c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e9b41721fa86b918b9d6070600d5e695 = $(`<div id="html_e9b41721fa86b918b9d6070600d5e695" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00f2fe; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 3 &bull; SEG                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11894965</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00f2fe; font-weight: 700;">$3,823.26</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_b91e3c3de374737e2b741f0d5a437f6c.setContent(html_e9b41721fa86b918b9d6070600d5e695);
+            
+        
+
+        circle_marker_2deb7f8f3741c4d4e7a5289dd718e0f1.bindPopup(popup_b91e3c3de374737e2b741f0d5a437f6c)
+        ;
+
+        
+    
+    
+            circle_marker_2deb7f8f3741c4d4e7a5289dd718e0f1.bindTooltip(
+                `<div>
+                     Parada 3: POC 11894965
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1e7136f12da69c45ca8597d5e4577cef = L.circleMarker(
+                [-2.1422235, -80.7726708],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00f2fe", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_95d048f7dc236bcec5eb209d86891354);
+        
+    
+        var popup_016cb9284f631e3ae2edc9d693b78ce8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_600c61569f15f67a162b5a2e24fe6376 = $(`<div id="html_600c61569f15f67a162b5a2e24fe6376" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00f2fe; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 4 &bull; SEG                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13850787</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00f2fe; font-weight: 700;">$4,851.51</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_016cb9284f631e3ae2edc9d693b78ce8.setContent(html_600c61569f15f67a162b5a2e24fe6376);
+            
+        
+
+        circle_marker_1e7136f12da69c45ca8597d5e4577cef.bindPopup(popup_016cb9284f631e3ae2edc9d693b78ce8)
+        ;
+
+        
+    
+    
+            circle_marker_1e7136f12da69c45ca8597d5e4577cef.bindTooltip(
+                `<div>
+                     Parada 4: POC 13850787
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_06ccf57914e7d05884df4495c441af47 = L.circleMarker(
+                [-2.14281225, -80.77458355],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00f2fe", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_95d048f7dc236bcec5eb209d86891354);
+        
+    
+        var popup_79b1fa702ab769b5fe7af97eecd7b75d = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5048f15d728847b0a7da0fb718f1fff3 = $(`<div id="html_5048f15d728847b0a7da0fb718f1fff3" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00f2fe; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 5 &bull; SEG                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895616</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00f2fe; font-weight: 700;">$14,554.44</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_79b1fa702ab769b5fe7af97eecd7b75d.setContent(html_5048f15d728847b0a7da0fb718f1fff3);
+            
+        
+
+        circle_marker_06ccf57914e7d05884df4495c441af47.bindPopup(popup_79b1fa702ab769b5fe7af97eecd7b75d)
+        ;
+
+        
+    
+    
+            circle_marker_06ccf57914e7d05884df4495c441af47.bindTooltip(
+                `<div>
+                     Parada 5: POC 11895616
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8335e7b7e087e8228bc9033b305e23fb = L.circleMarker(
+                [-2.14614255, -80.776432875],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00f2fe", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_95d048f7dc236bcec5eb209d86891354);
+        
+    
+        var popup_5654ed3e7a636ebee9f2db6d99c0ce05 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a326171c66ad57f0403222f9d58a17e1 = $(`<div id="html_a326171c66ad57f0403222f9d58a17e1" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00f2fe; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 6 &bull; SEG                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13439099</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00f2fe; font-weight: 700;">$22,068.21</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_5654ed3e7a636ebee9f2db6d99c0ce05.setContent(html_a326171c66ad57f0403222f9d58a17e1);
+            
+        
+
+        circle_marker_8335e7b7e087e8228bc9033b305e23fb.bindPopup(popup_5654ed3e7a636ebee9f2db6d99c0ce05)
+        ;
+
+        
+    
+    
+            circle_marker_8335e7b7e087e8228bc9033b305e23fb.bindTooltip(
+                `<div>
+                     Parada 6: POC 13439099
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bbcb37051d504dc1f1b1023432fe0707 = L.circleMarker(
+                [-2.150584425, -80.776924225],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00f2fe", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_95d048f7dc236bcec5eb209d86891354);
+        
+    
+        var popup_5f71f9b8f39224a44f83787dae00f0e9 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f238bae3190a0c3684a2487e221624f5 = $(`<div id="html_f238bae3190a0c3684a2487e221624f5" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00f2fe; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 7 &bull; SEG                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895507</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00f2fe; font-weight: 700;">$4,537.86</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_5f71f9b8f39224a44f83787dae00f0e9.setContent(html_f238bae3190a0c3684a2487e221624f5);
+            
+        
+
+        circle_marker_bbcb37051d504dc1f1b1023432fe0707.bindPopup(popup_5f71f9b8f39224a44f83787dae00f0e9)
+        ;
+
+        
+    
+    
+            circle_marker_bbcb37051d504dc1f1b1023432fe0707.bindTooltip(
+                `<div>
+                     Parada 7: POC 11895507
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4c35e80a796fe356abaad205a8201ee4 = L.circleMarker(
+                [-2.161762675, -80.8116671],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00f2fe", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_95d048f7dc236bcec5eb209d86891354);
+        
+    
+        var popup_815e49e59864b708fb2bb2bf402d7467 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4b2242e0675a1953d693461759419980 = $(`<div id="html_4b2242e0675a1953d693461759419980" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00f2fe; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 8 &bull; SEG                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11894767</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00f2fe; font-weight: 700;">$3,405.49</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_815e49e59864b708fb2bb2bf402d7467.setContent(html_4b2242e0675a1953d693461759419980);
+            
+        
+
+        circle_marker_4c35e80a796fe356abaad205a8201ee4.bindPopup(popup_815e49e59864b708fb2bb2bf402d7467)
+        ;
+
+        
+    
+    
+            circle_marker_4c35e80a796fe356abaad205a8201ee4.bindTooltip(
+                `<div>
+                     Parada 8: POC 11894767
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_346ece1b7de2eafae0620aee213c63c5 = L.polyline(
+                [[-2.22075691726103, -80.89751406681955], [-2.14196253333, -80.7754318], [-2.14052103333, -80.77599353333], [-2.13861125, -80.7746226], [-2.1422235, -80.7726708], [-2.14281225, -80.77458355], [-2.14614255, -80.776432875], [-2.150584425, -80.776924225], [-2.161762675, -80.8116671], [-2.22075691726103, -80.89751406681955]],
+                {"bubblingMouseEvents": true, "color": "#00f2fe", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#00f2fe", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_95d048f7dc236bcec5eb209d86891354);
+        
+    
+            poly_line_346ece1b7de2eafae0620aee213c63c5.bindTooltip(
+                `<div>
+                     Circuito Otimizado: SEG
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_95d048f7dc236bcec5eb209d86891354.addTo(map_2ee1013f702f6cedccffdae85c67292b);
+        
+    
+            var feature_group_43c797b70350df86dfc19a77de54c894 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_6051aab43429c6d18cac7d961adfe173 = L.circleMarker(
+                [-2.2404939, -80.9328749],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_b54b2e470fcb13091a1259af834ec7dd = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_507a7db840332a190b02e80465a7a945 = $(`<div id="html_507a7db840332a190b02e80465a7a945" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 1 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12537600</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$19,796.85</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_b54b2e470fcb13091a1259af834ec7dd.setContent(html_507a7db840332a190b02e80465a7a945);
+            
+        
+
+        circle_marker_6051aab43429c6d18cac7d961adfe173.bindPopup(popup_b54b2e470fcb13091a1259af834ec7dd)
+        ;
+
+        
+    
+    
+            circle_marker_6051aab43429c6d18cac7d961adfe173.bindTooltip(
+                `<div>
+                     Parada 1: POC 12537600
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_43e10b02cce00a9d75e10b75d470a3a7 = L.circleMarker(
+                [-2.237442775, -80.931460725],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_c0679891f03a4e06fc83981c93ac1461 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_9c10ac7be3f5e754d710f09cf4fb25f7 = $(`<div id="html_9c10ac7be3f5e754d710f09cf4fb25f7" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 2 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">14162012</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$3,941.36</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_c0679891f03a4e06fc83981c93ac1461.setContent(html_9c10ac7be3f5e754d710f09cf4fb25f7);
+            
+        
+
+        circle_marker_43e10b02cce00a9d75e10b75d470a3a7.bindPopup(popup_c0679891f03a4e06fc83981c93ac1461)
+        ;
+
+        
+    
+    
+            circle_marker_43e10b02cce00a9d75e10b75d470a3a7.bindTooltip(
+                `<div>
+                     Parada 2: POC 14162012
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_adc15ed62d2d71b22d9218ddbe3df272 = L.circleMarker(
+                [-2.23666913333, -80.9317887],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_2b5ac1832cd6232c619d77d379a9686c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c2e81f67daa4f3f7d820b50974db25e9 = $(`<div id="html_c2e81f67daa4f3f7d820b50974db25e9" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 3 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11896362</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$4,975.53</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_2b5ac1832cd6232c619d77d379a9686c.setContent(html_c2e81f67daa4f3f7d820b50974db25e9);
+            
+        
+
+        circle_marker_adc15ed62d2d71b22d9218ddbe3df272.bindPopup(popup_2b5ac1832cd6232c619d77d379a9686c)
+        ;
+
+        
+    
+    
+            circle_marker_adc15ed62d2d71b22d9218ddbe3df272.bindTooltip(
+                `<div>
+                     Parada 3: POC 11896362
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bab62a671071fcf2fdee7159d5434b4a = L.circleMarker(
+                [-2.2355323, -80.9318724],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_076985f3f7ec4dddc3af8190bca5fe11 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b66d5239dc3fed9d76c10986453abbb9 = $(`<div id="html_b66d5239dc3fed9d76c10986453abbb9" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 4 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13932519</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$12,171.70</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_076985f3f7ec4dddc3af8190bca5fe11.setContent(html_b66d5239dc3fed9d76c10986453abbb9);
+            
+        
+
+        circle_marker_bab62a671071fcf2fdee7159d5434b4a.bindPopup(popup_076985f3f7ec4dddc3af8190bca5fe11)
+        ;
+
+        
+    
+    
+            circle_marker_bab62a671071fcf2fdee7159d5434b4a.bindTooltip(
+                `<div>
+                     Parada 4: POC 13932519
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cab7de9c64988414dfa0fdd499bba7cd = L.circleMarker(
+                [-2.23522455, -80.9332643],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_f7987099aa52b06775456386ed8b7ea4 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_33cd8a970ea8b9fe87ff48ea884900c2 = $(`<div id="html_33cd8a970ea8b9fe87ff48ea884900c2" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 5 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895752</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$2,524.02</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_f7987099aa52b06775456386ed8b7ea4.setContent(html_33cd8a970ea8b9fe87ff48ea884900c2);
+            
+        
+
+        circle_marker_cab7de9c64988414dfa0fdd499bba7cd.bindPopup(popup_f7987099aa52b06775456386ed8b7ea4)
+        ;
+
+        
+    
+    
+            circle_marker_cab7de9c64988414dfa0fdd499bba7cd.bindTooltip(
+                `<div>
+                     Parada 5: POC 11895752
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4e69ea5233b7dc55d230984856b1b226 = L.circleMarker(
+                [-2.23463405, -80.93258755],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_1c1b54c52a9c753c976e5ee1bcb2128b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2a3d6e56955af59de92b5d48b05d1962 = $(`<div id="html_2a3d6e56955af59de92b5d48b05d1962" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 6 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11896171</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$2,544.67</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_1c1b54c52a9c753c976e5ee1bcb2128b.setContent(html_2a3d6e56955af59de92b5d48b05d1962);
+            
+        
+
+        circle_marker_4e69ea5233b7dc55d230984856b1b226.bindPopup(popup_1c1b54c52a9c753c976e5ee1bcb2128b)
+        ;
+
+        
+    
+    
+            circle_marker_4e69ea5233b7dc55d230984856b1b226.bindTooltip(
+                `<div>
+                     Parada 6: POC 11896171
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_900f6e7ffa3a04b8bd020b41b8fced1d = L.circleMarker(
+                [-2.23213823333, -80.9327155],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_3003f986762d5a64d581f5ce6d2c758c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d159bba845736a4dc54e004909330009 = $(`<div id="html_d159bba845736a4dc54e004909330009" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 7 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895304</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$3,539.98</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_3003f986762d5a64d581f5ce6d2c758c.setContent(html_d159bba845736a4dc54e004909330009);
+            
+        
+
+        circle_marker_900f6e7ffa3a04b8bd020b41b8fced1d.bindPopup(popup_3003f986762d5a64d581f5ce6d2c758c)
+        ;
+
+        
+    
+    
+            circle_marker_900f6e7ffa3a04b8bd020b41b8fced1d.bindTooltip(
+                `<div>
+                     Parada 7: POC 11895304
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ff1d732386f8468fd579d39b32e4fe5c = L.circleMarker(
+                [-2.234824475, -80.93011945],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_0ba3f261c077f4c5477124c9df13c9d6 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b2e3a6bca52c24320d67a6d97d5f94fa = $(`<div id="html_b2e3a6bca52c24320d67a6d97d5f94fa" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 8 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12652363</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$3,593.05</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_0ba3f261c077f4c5477124c9df13c9d6.setContent(html_b2e3a6bca52c24320d67a6d97d5f94fa);
+            
+        
+
+        circle_marker_ff1d732386f8468fd579d39b32e4fe5c.bindPopup(popup_0ba3f261c077f4c5477124c9df13c9d6)
+        ;
+
+        
+    
+    
+            circle_marker_ff1d732386f8468fd579d39b32e4fe5c.bindTooltip(
+                `<div>
+                     Parada 8: POC 12652363
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_595405f98fddd327ca1772cb14127c04 = L.circleMarker(
+                [-2.23489183333, -80.93011393333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_ee59f155cdfe62aaa4a89b9fae1cc675 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f06c4facd3ab5963e34f75befaf32763 = $(`<div id="html_f06c4facd3ab5963e34f75befaf32763" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 9 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12619783</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$8,206.50</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_ee59f155cdfe62aaa4a89b9fae1cc675.setContent(html_f06c4facd3ab5963e34f75befaf32763);
+            
+        
+
+        circle_marker_595405f98fddd327ca1772cb14127c04.bindPopup(popup_ee59f155cdfe62aaa4a89b9fae1cc675)
+        ;
+
+        
+    
+    
+            circle_marker_595405f98fddd327ca1772cb14127c04.bindTooltip(
+                `<div>
+                     Parada 9: POC 12619783
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_68240dd84c495bf7c5a554386ce90858 = L.circleMarker(
+                [-2.237571625, -80.92966635],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_7393cb705ed7f907f8632ab9311e866b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_1d62f33a04be3d9f4e0fa22b8bcf7005 = $(`<div id="html_1d62f33a04be3d9f4e0fa22b8bcf7005" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 10 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13061193</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$2,822.99</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_7393cb705ed7f907f8632ab9311e866b.setContent(html_1d62f33a04be3d9f4e0fa22b8bcf7005);
+            
+        
+
+        circle_marker_68240dd84c495bf7c5a554386ce90858.bindPopup(popup_7393cb705ed7f907f8632ab9311e866b)
+        ;
+
+        
+    
+    
+            circle_marker_68240dd84c495bf7c5a554386ce90858.bindTooltip(
+                `<div>
+                     Parada 10: POC 13061193
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9a6e9c1e616bd4b39b046547f4137eb6 = L.circleMarker(
+                [-2.23728795, -80.9283685],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_ae7a439da64f08f6aca4b4efb2638fb9 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f08a455918413fe30321e42d3762e7f0 = $(`<div id="html_f08a455918413fe30321e42d3762e7f0" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 11 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895371</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$7,337.91</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_ae7a439da64f08f6aca4b4efb2638fb9.setContent(html_f08a455918413fe30321e42d3762e7f0);
+            
+        
+
+        circle_marker_9a6e9c1e616bd4b39b046547f4137eb6.bindPopup(popup_ae7a439da64f08f6aca4b4efb2638fb9)
+        ;
+
+        
+    
+    
+            circle_marker_9a6e9c1e616bd4b39b046547f4137eb6.bindTooltip(
+                `<div>
+                     Parada 11: POC 11895371
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ee4772e24c7330873ac6ac6edaa975bd = L.circleMarker(
+                [-2.24920906667, -80.9267768],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_d0998f9e3454eed49fca469c865b3d37 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b30ec1da6219cc673a069121224d1b8f = $(`<div id="html_b30ec1da6219cc673a069121224d1b8f" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 12 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895921</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$2,380.45</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_d0998f9e3454eed49fca469c865b3d37.setContent(html_b30ec1da6219cc673a069121224d1b8f);
+            
+        
+
+        circle_marker_ee4772e24c7330873ac6ac6edaa975bd.bindPopup(popup_d0998f9e3454eed49fca469c865b3d37)
+        ;
+
+        
+    
+    
+            circle_marker_ee4772e24c7330873ac6ac6edaa975bd.bindTooltip(
+                `<div>
+                     Parada 12: POC 11895921
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c0fa979d50f532e613d54a747d727d92 = L.circleMarker(
+                [-2.24546736667, -80.91577693333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00e676", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+        var popup_ff7fab8febf12e2b0a17a8041d508b57 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3c460f72fc3178978265e1ff5fa1fcff = $(`<div id="html_3c460f72fc3178978265e1ff5fa1fcff" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #00e676; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 13 &bull; TER                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11869815</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #00e676; font-weight: 700;">$2,551.83</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_ff7fab8febf12e2b0a17a8041d508b57.setContent(html_3c460f72fc3178978265e1ff5fa1fcff);
+            
+        
+
+        circle_marker_c0fa979d50f532e613d54a747d727d92.bindPopup(popup_ff7fab8febf12e2b0a17a8041d508b57)
+        ;
+
+        
+    
+    
+            circle_marker_c0fa979d50f532e613d54a747d727d92.bindTooltip(
+                `<div>
+                     Parada 13: POC 11869815
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_1564fe719dd43c48009617dd8f61b0ce = L.polyline(
+                [[-2.22075691726103, -80.89751406681955], [-2.2404939, -80.9328749], [-2.237442775, -80.931460725], [-2.23666913333, -80.9317887], [-2.2355323, -80.9318724], [-2.23522455, -80.9332643], [-2.23463405, -80.93258755], [-2.23213823333, -80.9327155], [-2.234824475, -80.93011945], [-2.23489183333, -80.93011393333], [-2.237571625, -80.92966635], [-2.23728795, -80.9283685], [-2.24920906667, -80.9267768], [-2.24546736667, -80.91577693333], [-2.22075691726103, -80.89751406681955]],
+                {"bubblingMouseEvents": true, "color": "#00e676", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#00e676", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_43c797b70350df86dfc19a77de54c894);
+        
+    
+            poly_line_1564fe719dd43c48009617dd8f61b0ce.bindTooltip(
+                `<div>
+                     Circuito Otimizado: TER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var feature_group_629317aaa18179339ac0c0be46aa310e = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_f25b3d6892203fc15930f13a135fc0d9 = L.circleMarker(
+                [-2.21187686875, -80.87005284375],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_9d79b65649082106636484a7c2fb5b8c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e35aca1fd3990522c3d980aa823338f8 = $(`<div id="html_e35aca1fd3990522c3d980aa823338f8" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 1 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11935275</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$95,679.02</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_9d79b65649082106636484a7c2fb5b8c.setContent(html_e35aca1fd3990522c3d980aa823338f8);
+            
+        
+
+        circle_marker_f25b3d6892203fc15930f13a135fc0d9.bindPopup(popup_9d79b65649082106636484a7c2fb5b8c)
+        ;
+
+        
+    
+    
+            circle_marker_f25b3d6892203fc15930f13a135fc0d9.bindTooltip(
+                `<div>
+                     Parada 1: POC 11935275
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5bbd06d00a0c5ce3c8a02a9f1f82f819 = L.circleMarker(
+                [-2.2043957, -80.8726858],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_1388399e66f5cb6c1d985a56fe1850f1 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b41a479f599fd7221108dbd8f7637bdd = $(`<div id="html_b41a479f599fd7221108dbd8f7637bdd" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 2 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12981554</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$2,087.76</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_1388399e66f5cb6c1d985a56fe1850f1.setContent(html_b41a479f599fd7221108dbd8f7637bdd);
+            
+        
+
+        circle_marker_5bbd06d00a0c5ce3c8a02a9f1f82f819.bindPopup(popup_1388399e66f5cb6c1d985a56fe1850f1)
+        ;
+
+        
+    
+    
+            circle_marker_5bbd06d00a0c5ce3c8a02a9f1f82f819.bindTooltip(
+                `<div>
+                     Parada 2: POC 12981554
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_339f83cf084849aa115382e57ae95b38 = L.circleMarker(
+                [-2.2413471, -80.8838771],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_c6b785a49800b3deff7a8a8387586e0c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4fe4082d5dffbef0fcbe0e9ad269b279 = $(`<div id="html_4fe4082d5dffbef0fcbe0e9ad269b279" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 3 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11869425</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$2,219.49</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_c6b785a49800b3deff7a8a8387586e0c.setContent(html_4fe4082d5dffbef0fcbe0e9ad269b279);
+            
+        
+
+        circle_marker_339f83cf084849aa115382e57ae95b38.bindPopup(popup_c6b785a49800b3deff7a8a8387586e0c)
+        ;
+
+        
+    
+    
+            circle_marker_339f83cf084849aa115382e57ae95b38.bindTooltip(
+                `<div>
+                     Parada 3: POC 11869425
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b4fd9ee08b21be359b6e794cee90e9a8 = L.circleMarker(
+                [-2.2286537, -80.8670596],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_ef730c38544be05f05e13916fe94764a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_fdbbea7a953debee11568acb92b5382d = $(`<div id="html_fdbbea7a953debee11568acb92b5382d" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 4 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11893825</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$2,160.14</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_ef730c38544be05f05e13916fe94764a.setContent(html_fdbbea7a953debee11568acb92b5382d);
+            
+        
+
+        circle_marker_b4fd9ee08b21be359b6e794cee90e9a8.bindPopup(popup_ef730c38544be05f05e13916fe94764a)
+        ;
+
+        
+    
+    
+            circle_marker_b4fd9ee08b21be359b6e794cee90e9a8.bindTooltip(
+                `<div>
+                     Parada 4: POC 11893825
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_760fa441bc1d7a426d463cc7511d8669 = L.circleMarker(
+                [-2.23015396667, -80.8653942],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_dd3c1545bca58d4dc2b881cb1ba8d683 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0c07efc7fc70b64ea5a2cc654cf260ce = $(`<div id="html_0c07efc7fc70b64ea5a2cc654cf260ce" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 5 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11893835</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$47,079.33</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_dd3c1545bca58d4dc2b881cb1ba8d683.setContent(html_0c07efc7fc70b64ea5a2cc654cf260ce);
+            
+        
+
+        circle_marker_760fa441bc1d7a426d463cc7511d8669.bindPopup(popup_dd3c1545bca58d4dc2b881cb1ba8d683)
+        ;
+
+        
+    
+    
+            circle_marker_760fa441bc1d7a426d463cc7511d8669.bindTooltip(
+                `<div>
+                     Parada 5: POC 11893835
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ef5c7f0bd0236ab602bfdf41669d76ca = L.circleMarker(
+                [-2.22851983333, -80.8606244],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_064b07cfe19bd11f19def13f3d444654 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_55c3d082585797388fe66c503f1ad98e = $(`<div id="html_55c3d082585797388fe66c503f1ad98e" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 6 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11893856</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$125,828.66</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_064b07cfe19bd11f19def13f3d444654.setContent(html_55c3d082585797388fe66c503f1ad98e);
+            
+        
+
+        circle_marker_ef5c7f0bd0236ab602bfdf41669d76ca.bindPopup(popup_064b07cfe19bd11f19def13f3d444654)
+        ;
+
+        
+    
+    
+            circle_marker_ef5c7f0bd0236ab602bfdf41669d76ca.bindTooltip(
+                `<div>
+                     Parada 6: POC 11893856
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_360a8a2509aaa8cde4d28edf8998fbae = L.circleMarker(
+                [-2.22856656667, -80.859221],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_8500fc2f4c96e60eef7b3b329818e877 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e0d261baf2ec514e25f4766cad363802 = $(`<div id="html_e0d261baf2ec514e25f4766cad363802" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 7 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12469253</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$3,265.20</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_8500fc2f4c96e60eef7b3b329818e877.setContent(html_e0d261baf2ec514e25f4766cad363802);
+            
+        
+
+        circle_marker_360a8a2509aaa8cde4d28edf8998fbae.bindPopup(popup_8500fc2f4c96e60eef7b3b329818e877)
+        ;
+
+        
+    
+    
+            circle_marker_360a8a2509aaa8cde4d28edf8998fbae.bindTooltip(
+                `<div>
+                     Parada 7: POC 12469253
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7f58fb6969b395d871a42d12f7447383 = L.circleMarker(
+                [-2.22975926667, -80.85835616667],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_2a87e83b00d079a965aadfd03c68a77f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2403de5082795e4a13ec7ec7f3551e09 = $(`<div id="html_2403de5082795e4a13ec7ec7f3551e09" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 8 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895457</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$2,326.50</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_2a87e83b00d079a965aadfd03c68a77f.setContent(html_2403de5082795e4a13ec7ec7f3551e09);
+            
+        
+
+        circle_marker_7f58fb6969b395d871a42d12f7447383.bindPopup(popup_2a87e83b00d079a965aadfd03c68a77f)
+        ;
+
+        
+    
+    
+            circle_marker_7f58fb6969b395d871a42d12f7447383.bindTooltip(
+                `<div>
+                     Parada 8: POC 11895457
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_babff5a8b74bd056bc37a0a8bf786a3b = L.circleMarker(
+                [-2.2297714, -80.85834733333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_990d9a9a493e602bb3ad1375a6226d8b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_fd9531abe6c245f7c207493f3b7a9dee = $(`<div id="html_fd9531abe6c245f7c207493f3b7a9dee" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 9 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11896149</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$2,976.30</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_990d9a9a493e602bb3ad1375a6226d8b.setContent(html_fd9531abe6c245f7c207493f3b7a9dee);
+            
+        
+
+        circle_marker_babff5a8b74bd056bc37a0a8bf786a3b.bindPopup(popup_990d9a9a493e602bb3ad1375a6226d8b)
+        ;
+
+        
+    
+    
+            circle_marker_babff5a8b74bd056bc37a0a8bf786a3b.bindTooltip(
+                `<div>
+                     Parada 9: POC 11896149
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b2fcc2ff30448433bca73cd8f42ccf40 = L.circleMarker(
+                [-2.22961296667, -80.85804306667],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_7906ee3179317df6e0fec0aab62a6fd3 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c35de5e8b91d5b7d5dfa7e01680097d3 = $(`<div id="html_c35de5e8b91d5b7d5dfa7e01680097d3" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 10 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11894916</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$2,018.27</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_7906ee3179317df6e0fec0aab62a6fd3.setContent(html_c35de5e8b91d5b7d5dfa7e01680097d3);
+            
+        
+
+        circle_marker_b2fcc2ff30448433bca73cd8f42ccf40.bindPopup(popup_7906ee3179317df6e0fec0aab62a6fd3)
+        ;
+
+        
+    
+    
+            circle_marker_b2fcc2ff30448433bca73cd8f42ccf40.bindTooltip(
+                `<div>
+                     Parada 10: POC 11894916
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_14f1496d4183d334f74b9ae401d5fd4f = L.circleMarker(
+                [-2.23517686667, -80.85575743333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_c4214a8506ad5d2c8a8e4a16438f1877 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_cc8497723124f0a8c86a225190ce5782 = $(`<div id="html_cc8497723124f0a8c86a225190ce5782" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 11 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11896088</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$3,597.66</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_c4214a8506ad5d2c8a8e4a16438f1877.setContent(html_cc8497723124f0a8c86a225190ce5782);
+            
+        
+
+        circle_marker_14f1496d4183d334f74b9ae401d5fd4f.bindPopup(popup_c4214a8506ad5d2c8a8e4a16438f1877)
+        ;
+
+        
+    
+    
+            circle_marker_14f1496d4183d334f74b9ae401d5fd4f.bindTooltip(
+                `<div>
+                     Parada 11: POC 11896088
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bc529f8b81fe07ce21bba93227ed2b7f = L.circleMarker(
+                [-2.228265, -80.8513217],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_9f05cd7828e84eba39d64e10f31c7adc = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4fca3813613c1f89022589f92b53562f = $(`<div id="html_4fca3813613c1f89022589f92b53562f" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 12 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13435710</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$3,502.75</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_9f05cd7828e84eba39d64e10f31c7adc.setContent(html_4fca3813613c1f89022589f92b53562f);
+            
+        
+
+        circle_marker_bc529f8b81fe07ce21bba93227ed2b7f.bindPopup(popup_9f05cd7828e84eba39d64e10f31c7adc)
+        ;
+
+        
+    
+    
+            circle_marker_bc529f8b81fe07ce21bba93227ed2b7f.bindTooltip(
+                `<div>
+                     Parada 12: POC 13435710
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_72d6b80df48388529f818dd47703b9d8 = L.circleMarker(
+                [-2.2264143, -80.8508356],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_afa1e08344d40dc4fca4e46facf9d2e4 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_aee088f7bf3573c8d08005381db77f17 = $(`<div id="html_aee088f7bf3573c8d08005381db77f17" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 13 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12275049</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$5,266.17</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_afa1e08344d40dc4fca4e46facf9d2e4.setContent(html_aee088f7bf3573c8d08005381db77f17);
+            
+        
+
+        circle_marker_72d6b80df48388529f818dd47703b9d8.bindPopup(popup_afa1e08344d40dc4fca4e46facf9d2e4)
+        ;
+
+        
+    
+    
+            circle_marker_72d6b80df48388529f818dd47703b9d8.bindTooltip(
+                `<div>
+                     Parada 13: POC 12275049
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_be109d7d0ce1f263ef50f72cebb21c41 = L.circleMarker(
+                [-2.2275133, -80.85696633333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_2adee7fa6917f79682c3dd599d9ec294 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_1d523c65ca8159e3c2f5daf1d45615f3 = $(`<div id="html_1d523c65ca8159e3c2f5daf1d45615f3" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 14 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11893787</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$4,384.89</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_2adee7fa6917f79682c3dd599d9ec294.setContent(html_1d523c65ca8159e3c2f5daf1d45615f3);
+            
+        
+
+        circle_marker_be109d7d0ce1f263ef50f72cebb21c41.bindPopup(popup_2adee7fa6917f79682c3dd599d9ec294)
+        ;
+
+        
+    
+    
+            circle_marker_be109d7d0ce1f263ef50f72cebb21c41.bindTooltip(
+                `<div>
+                     Parada 14: POC 11893787
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2e3847f363a3223fc841cfb48212f3c7 = L.circleMarker(
+                [-2.22385543333, -80.8564712],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_fdbdeba72934da62dee143f4b1a8a0e0 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_dfae9e89e8324f8549ff0bb28bafb8fc = $(`<div id="html_dfae9e89e8324f8549ff0bb28bafb8fc" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 15 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12570499</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$4,774.15</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_fdbdeba72934da62dee143f4b1a8a0e0.setContent(html_dfae9e89e8324f8549ff0bb28bafb8fc);
+            
+        
+
+        circle_marker_2e3847f363a3223fc841cfb48212f3c7.bindPopup(popup_fdbdeba72934da62dee143f4b1a8a0e0)
+        ;
+
+        
+    
+    
+            circle_marker_2e3847f363a3223fc841cfb48212f3c7.bindTooltip(
+                `<div>
+                     Parada 15: POC 12570499
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_541ef07e815823b18d35b856c34eac77 = L.circleMarker(
+                [-2.2200849, -80.85518653333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_2593a0543dc3cec069234f6b5576ec43 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c3a195993babbd78181b39ca64b2767c = $(`<div id="html_c3a195993babbd78181b39ca64b2767c" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 16 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895068</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$31,547.18</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_2593a0543dc3cec069234f6b5576ec43.setContent(html_c3a195993babbd78181b39ca64b2767c);
+            
+        
+
+        circle_marker_541ef07e815823b18d35b856c34eac77.bindPopup(popup_2593a0543dc3cec069234f6b5576ec43)
+        ;
+
+        
+    
+    
+            circle_marker_541ef07e815823b18d35b856c34eac77.bindTooltip(
+                `<div>
+                     Parada 16: POC 11895068
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4543130c60fa3b980022d0fae810137c = L.circleMarker(
+                [-2.2398054, -80.7717685],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb300", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+        var popup_6d5798df70502733d064f9002011fe14 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_56314e67af30565e956f5ca165ffa66d = $(`<div id="html_56314e67af30565e956f5ca165ffa66d" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ffb300; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 17 &bull; QUA                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13975335</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ffb300; font-weight: 700;">$2,169.29</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_6d5798df70502733d064f9002011fe14.setContent(html_56314e67af30565e956f5ca165ffa66d);
+            
+        
+
+        circle_marker_4543130c60fa3b980022d0fae810137c.bindPopup(popup_6d5798df70502733d064f9002011fe14)
+        ;
+
+        
+    
+    
+            circle_marker_4543130c60fa3b980022d0fae810137c.bindTooltip(
+                `<div>
+                     Parada 17: POC 13975335
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_846ec3e2a6792c60d3aea6725d991596 = L.polyline(
+                [[-2.22075691726103, -80.89751406681955], [-2.21187686875, -80.87005284375], [-2.2043957, -80.8726858], [-2.2413471, -80.8838771], [-2.2286537, -80.8670596], [-2.23015396667, -80.8653942], [-2.22851983333, -80.8606244], [-2.22856656667, -80.859221], [-2.22975926667, -80.85835616667], [-2.2297714, -80.85834733333], [-2.22961296667, -80.85804306667], [-2.23517686667, -80.85575743333], [-2.228265, -80.8513217], [-2.2264143, -80.8508356], [-2.2275133, -80.85696633333], [-2.22385543333, -80.8564712], [-2.2200849, -80.85518653333], [-2.2398054, -80.7717685], [-2.22075691726103, -80.89751406681955]],
+                {"bubblingMouseEvents": true, "color": "#ffb300", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ffb300", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_629317aaa18179339ac0c0be46aa310e);
+        
+    
+            poly_line_846ec3e2a6792c60d3aea6725d991596.bindTooltip(
+                `<div>
+                     Circuito Otimizado: QUA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var feature_group_88ccb814cb45ee5753fe9f8c3c2586e9 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_9db1740460f9144413265cbdf065a4c4 = L.circleMarker(
+                [-2.2061434, -80.97223366667],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_d73f72aded60805b169b8474fe7ae05e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a75db02c2e6a392e459337ea1f747332 = $(`<div id="html_a75db02c2e6a392e459337ea1f747332" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 1 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11870057</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$2,239.01</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_d73f72aded60805b169b8474fe7ae05e.setContent(html_a75db02c2e6a392e459337ea1f747332);
+            
+        
+
+        circle_marker_9db1740460f9144413265cbdf065a4c4.bindPopup(popup_d73f72aded60805b169b8474fe7ae05e)
+        ;
+
+        
+    
+    
+            circle_marker_9db1740460f9144413265cbdf065a4c4.bindTooltip(
+                `<div>
+                     Parada 1: POC 11870057
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c482c28ac2897a660c3141de4c3c92c2 = L.circleMarker(
+                [-2.205382425, -80.973114375],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_5906feecd74ee35f3d8bf6a1577767f7 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_ac76a25103fd0211fc4a82603939b3ee = $(`<div id="html_ac76a25103fd0211fc4a82603939b3ee" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 2 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12184246</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$4,656.81</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_5906feecd74ee35f3d8bf6a1577767f7.setContent(html_ac76a25103fd0211fc4a82603939b3ee);
+            
+        
+
+        circle_marker_c482c28ac2897a660c3141de4c3c92c2.bindPopup(popup_5906feecd74ee35f3d8bf6a1577767f7)
+        ;
+
+        
+    
+    
+            circle_marker_c482c28ac2897a660c3141de4c3c92c2.bindTooltip(
+                `<div>
+                     Parada 2: POC 12184246
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_877b0607e4fe05477aeb276b9d169a17 = L.circleMarker(
+                [-2.2048971, -80.97383253333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_c807eccd696603fdfec988ae8e358b1d = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d01b0bcc515e397e378e5958fb469a15 = $(`<div id="html_d01b0bcc515e397e378e5958fb469a15" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 3 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895515</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$5,945.49</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_c807eccd696603fdfec988ae8e358b1d.setContent(html_d01b0bcc515e397e378e5958fb469a15);
+            
+        
+
+        circle_marker_877b0607e4fe05477aeb276b9d169a17.bindPopup(popup_c807eccd696603fdfec988ae8e358b1d)
+        ;
+
+        
+    
+    
+            circle_marker_877b0607e4fe05477aeb276b9d169a17.bindTooltip(
+                `<div>
+                     Parada 3: POC 11895515
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ca7baf865076996d193839dd29ed5cf1 = L.circleMarker(
+                [-2.20026966667, -80.9806652],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_478407ecefb2a1065dce8c225ef0cb97 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_723b5bc1805fd49ea9778f2bc2d10a06 = $(`<div id="html_723b5bc1805fd49ea9778f2bc2d10a06" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 4 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895972</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$2,648.15</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_478407ecefb2a1065dce8c225ef0cb97.setContent(html_723b5bc1805fd49ea9778f2bc2d10a06);
+            
+        
+
+        circle_marker_ca7baf865076996d193839dd29ed5cf1.bindPopup(popup_478407ecefb2a1065dce8c225ef0cb97)
+        ;
+
+        
+    
+    
+            circle_marker_ca7baf865076996d193839dd29ed5cf1.bindTooltip(
+                `<div>
+                     Parada 4: POC 11895972
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_be9e9bb8eb27437ddbf842f6bde4c630 = L.circleMarker(
+                [-2.19821745, -80.9846482],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_1398c14ae72187231990c3c39b05bd15 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b077350f91753eb23a143756d3854bbc = $(`<div id="html_b077350f91753eb23a143756d3854bbc" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 5 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11896460</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$2,225.62</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_1398c14ae72187231990c3c39b05bd15.setContent(html_b077350f91753eb23a143756d3854bbc);
+            
+        
+
+        circle_marker_be9e9bb8eb27437ddbf842f6bde4c630.bindPopup(popup_1398c14ae72187231990c3c39b05bd15)
+        ;
+
+        
+    
+    
+            circle_marker_be9e9bb8eb27437ddbf842f6bde4c630.bindTooltip(
+                `<div>
+                     Parada 5: POC 11896460
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b95872fe8759259fc3bded1e6c5fa59a = L.circleMarker(
+                [-2.20533233, -80.974419625],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_8de33745af152b8e8caa1f05e79dd3dc = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_300dd1aaca6aec2607fe02a921a9e7c2 = $(`<div id="html_300dd1aaca6aec2607fe02a921a9e7c2" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 6 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13781198</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$90,989.03</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_8de33745af152b8e8caa1f05e79dd3dc.setContent(html_300dd1aaca6aec2607fe02a921a9e7c2);
+            
+        
+
+        circle_marker_b95872fe8759259fc3bded1e6c5fa59a.bindPopup(popup_8de33745af152b8e8caa1f05e79dd3dc)
+        ;
+
+        
+    
+    
+            circle_marker_b95872fe8759259fc3bded1e6c5fa59a.bindTooltip(
+                `<div>
+                     Parada 6: POC 13781198
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_affd824e520a2ac7c0b8b26657630c62 = L.circleMarker(
+                [-2.21010093333, -80.96701923333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_56918b76eff31ee24215a694026bd270 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_7efd4f9ef2a458ba18f1955a7335c7b9 = $(`<div id="html_7efd4f9ef2a458ba18f1955a7335c7b9" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 7 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11896072</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$23,855.02</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_56918b76eff31ee24215a694026bd270.setContent(html_7efd4f9ef2a458ba18f1955a7335c7b9);
+            
+        
+
+        circle_marker_affd824e520a2ac7c0b8b26657630c62.bindPopup(popup_56918b76eff31ee24215a694026bd270)
+        ;
+
+        
+    
+    
+            circle_marker_affd824e520a2ac7c0b8b26657630c62.bindTooltip(
+                `<div>
+                     Parada 7: POC 11896072
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_62dbd3c6dfb933ab15893aad6754e122 = L.circleMarker(
+                [-2.2169869, -80.9558955],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_49ed66979c957cbb35079ed604c714e3 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_8e0ef7e238c4efabc3a2fb74f6cae0ed = $(`<div id="html_8e0ef7e238c4efabc3a2fb74f6cae0ed" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 8 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895673</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$2,779.29</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_49ed66979c957cbb35079ed604c714e3.setContent(html_8e0ef7e238c4efabc3a2fb74f6cae0ed);
+            
+        
+
+        circle_marker_62dbd3c6dfb933ab15893aad6754e122.bindPopup(popup_49ed66979c957cbb35079ed604c714e3)
+        ;
+
+        
+    
+    
+            circle_marker_62dbd3c6dfb933ab15893aad6754e122.bindTooltip(
+                `<div>
+                     Parada 8: POC 11895673
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_994a198e9422a366ee2ac281c4887261 = L.circleMarker(
+                [-2.208427575, -80.9517226],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_a7875d8491b58cd5ae60bed887928e2e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e65b836f159f956e97a7f5e84354b697 = $(`<div id="html_e65b836f159f956e97a7f5e84354b697" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 9 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12095672</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$4,808.44</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_a7875d8491b58cd5ae60bed887928e2e.setContent(html_e65b836f159f956e97a7f5e84354b697);
+            
+        
+
+        circle_marker_994a198e9422a366ee2ac281c4887261.bindPopup(popup_a7875d8491b58cd5ae60bed887928e2e)
+        ;
+
+        
+    
+    
+            circle_marker_994a198e9422a366ee2ac281c4887261.bindTooltip(
+                `<div>
+                     Parada 9: POC 12095672
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0587badef986227b1069cef2b02ab893 = L.circleMarker(
+                [-2.2074717, -80.950450625],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_e94b6d0856df29c34e3c623d5fc82bc7 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_16ded9c75b3f4834e32d2d8bb088c897 = $(`<div id="html_16ded9c75b3f4834e32d2d8bb088c897" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 10 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11896212</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$14,705.83</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_e94b6d0856df29c34e3c623d5fc82bc7.setContent(html_16ded9c75b3f4834e32d2d8bb088c897);
+            
+        
+
+        circle_marker_0587badef986227b1069cef2b02ab893.bindPopup(popup_e94b6d0856df29c34e3c623d5fc82bc7)
+        ;
+
+        
+    
+    
+            circle_marker_0587badef986227b1069cef2b02ab893.bindTooltip(
+                `<div>
+                     Parada 10: POC 11896212
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_082d08cc83f00a7ddb2cdbdbf22ba717 = L.circleMarker(
+                [-2.2059344, -80.949454825],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_a8565e11383c77ee45bf4c539b2c1b10 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_52dafaf456d861dffe733aa926bc2752 = $(`<div id="html_52dafaf456d861dffe733aa926bc2752" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 11 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895332</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$3,431.97</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_a8565e11383c77ee45bf4c539b2c1b10.setContent(html_52dafaf456d861dffe733aa926bc2752);
+            
+        
+
+        circle_marker_082d08cc83f00a7ddb2cdbdbf22ba717.bindPopup(popup_a8565e11383c77ee45bf4c539b2c1b10)
+        ;
+
+        
+    
+    
+            circle_marker_082d08cc83f00a7ddb2cdbdbf22ba717.bindTooltip(
+                `<div>
+                     Parada 11: POC 11895332
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c425933932fb4d8cc391f9692b6e3015 = L.circleMarker(
+                [-2.20893666667, -80.95027233333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_974ef2eab391bc8b629fd465da9f6eaa = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a4de75cef866b3653047d2f929daaac4 = $(`<div id="html_a4de75cef866b3653047d2f929daaac4" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 12 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13502812</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$2,979.06</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_974ef2eab391bc8b629fd465da9f6eaa.setContent(html_a4de75cef866b3653047d2f929daaac4);
+            
+        
+
+        circle_marker_c425933932fb4d8cc391f9692b6e3015.bindPopup(popup_974ef2eab391bc8b629fd465da9f6eaa)
+        ;
+
+        
+    
+    
+            circle_marker_c425933932fb4d8cc391f9692b6e3015.bindTooltip(
+                `<div>
+                     Parada 12: POC 13502812
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_29cc452c6d43ce36620298efe7f03062 = L.circleMarker(
+                [-2.20904345, -80.950569825],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_5ca322714c7e215f2d44154b7daa3303 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5af45ba656f9b475471dacdd74865b0c = $(`<div id="html_5af45ba656f9b475471dacdd74865b0c" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 13 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">14182790</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$3,291.44</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_5ca322714c7e215f2d44154b7daa3303.setContent(html_5af45ba656f9b475471dacdd74865b0c);
+            
+        
+
+        circle_marker_29cc452c6d43ce36620298efe7f03062.bindPopup(popup_5ca322714c7e215f2d44154b7daa3303)
+        ;
+
+        
+    
+    
+            circle_marker_29cc452c6d43ce36620298efe7f03062.bindTooltip(
+                `<div>
+                     Parada 13: POC 14182790
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6ba06c629cc20bb2b3a3dd3f07680205 = L.circleMarker(
+                [-2.20936013333, -80.95046733333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_994efe5313208b33d9c8c8e42f38ece9 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_8dee277db8210eb3aade758724606c5c = $(`<div id="html_8dee277db8210eb3aade758724606c5c" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 14 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11896372</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$9,799.28</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_994efe5313208b33d9c8c8e42f38ece9.setContent(html_8dee277db8210eb3aade758724606c5c);
+            
+        
+
+        circle_marker_6ba06c629cc20bb2b3a3dd3f07680205.bindPopup(popup_994efe5313208b33d9c8c8e42f38ece9)
+        ;
+
+        
+    
+    
+            circle_marker_6ba06c629cc20bb2b3a3dd3f07680205.bindTooltip(
+                `<div>
+                     Parada 14: POC 11896372
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b0dc44deea67bc96f07fac186ec5f2c8 = L.circleMarker(
+                [-2.21121995, -80.951211675],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_f05dcccd0ca5568ba129418508a118fd = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0e79c8a1bab9dce02131871d17b58903 = $(`<div id="html_0e79c8a1bab9dce02131871d17b58903" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 15 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13502599</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$14,743.45</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_f05dcccd0ca5568ba129418508a118fd.setContent(html_0e79c8a1bab9dce02131871d17b58903);
+            
+        
+
+        circle_marker_b0dc44deea67bc96f07fac186ec5f2c8.bindPopup(popup_f05dcccd0ca5568ba129418508a118fd)
+        ;
+
+        
+    
+    
+            circle_marker_b0dc44deea67bc96f07fac186ec5f2c8.bindTooltip(
+                `<div>
+                     Parada 15: POC 13502599
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_850c4efa30ebe00c7ee40488dc443023 = L.circleMarker(
+                [-2.21130215, -80.95102845],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_72ac250d66ede0ffbe8d5157ad654e59 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_79477052f9c9163db5c23fefaa467fca = $(`<div id="html_79477052f9c9163db5c23fefaa467fca" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 16 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12139943</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$2,423.53</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_72ac250d66ede0ffbe8d5157ad654e59.setContent(html_79477052f9c9163db5c23fefaa467fca);
+            
+        
+
+        circle_marker_850c4efa30ebe00c7ee40488dc443023.bindPopup(popup_72ac250d66ede0ffbe8d5157ad654e59)
+        ;
+
+        
+    
+    
+            circle_marker_850c4efa30ebe00c7ee40488dc443023.bindTooltip(
+                `<div>
+                     Parada 16: POC 12139943
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_36dbea0274a30780e36b0b659f3c74df = L.circleMarker(
+                [-2.2113292, -80.9509796],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_6364d01f8b5d6bd39fb08561fa02376f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c4e98db5715b856f9b4a31defe52c53d = $(`<div id="html_c4e98db5715b856f9b4a31defe52c53d" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 17 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895403</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$5,521.37</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_6364d01f8b5d6bd39fb08561fa02376f.setContent(html_c4e98db5715b856f9b4a31defe52c53d);
+            
+        
+
+        circle_marker_36dbea0274a30780e36b0b659f3c74df.bindPopup(popup_6364d01f8b5d6bd39fb08561fa02376f)
+        ;
+
+        
+    
+    
+            circle_marker_36dbea0274a30780e36b0b659f3c74df.bindTooltip(
+                `<div>
+                     Parada 17: POC 11895403
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a914780fe0928b2c6fee15e5f917d506 = L.circleMarker(
+                [-2.21124076667, -80.9509481],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_5c356f806aa3cbe5a191fc686514fbec = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2b3ef81232c126c04ef1c9c1227a88e0 = $(`<div id="html_2b3ef81232c126c04ef1c9c1227a88e0" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 18 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13714993</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$18,340.70</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_5c356f806aa3cbe5a191fc686514fbec.setContent(html_2b3ef81232c126c04ef1c9c1227a88e0);
+            
+        
+
+        circle_marker_a914780fe0928b2c6fee15e5f917d506.bindPopup(popup_5c356f806aa3cbe5a191fc686514fbec)
+        ;
+
+        
+    
+    
+            circle_marker_a914780fe0928b2c6fee15e5f917d506.bindTooltip(
+                `<div>
+                     Parada 18: POC 13714993
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5c9d6bb9f4280a85caaf2c1a0acc7cf0 = L.circleMarker(
+                [-2.211238, -80.9508605],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_da12c07300c739ed0d230beea33b6cd9 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c75d04a2e7f66124b6ebf6e949ed3fd8 = $(`<div id="html_c75d04a2e7f66124b6ebf6e949ed3fd8" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 19 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13950441</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$6,210.19</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_da12c07300c739ed0d230beea33b6cd9.setContent(html_c75d04a2e7f66124b6ebf6e949ed3fd8);
+            
+        
+
+        circle_marker_5c9d6bb9f4280a85caaf2c1a0acc7cf0.bindPopup(popup_da12c07300c739ed0d230beea33b6cd9)
+        ;
+
+        
+    
+    
+            circle_marker_5c9d6bb9f4280a85caaf2c1a0acc7cf0.bindTooltip(
+                `<div>
+                     Parada 19: POC 13950441
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4d809765ded40af13ff573b8ef031bdd = L.circleMarker(
+                [-2.2113568, -80.94994626667],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_8fb2b6ed7771aca676cd2bdd49ee28cf = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_74159a58c94435893622ee7483fe1ae2 = $(`<div id="html_74159a58c94435893622ee7483fe1ae2" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 20 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11896063</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$29,646.27</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_8fb2b6ed7771aca676cd2bdd49ee28cf.setContent(html_74159a58c94435893622ee7483fe1ae2);
+            
+        
+
+        circle_marker_4d809765ded40af13ff573b8ef031bdd.bindPopup(popup_8fb2b6ed7771aca676cd2bdd49ee28cf)
+        ;
+
+        
+    
+    
+            circle_marker_4d809765ded40af13ff573b8ef031bdd.bindTooltip(
+                `<div>
+                     Parada 20: POC 11896063
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_31cfd2bf05b325effdae587ff59d7c81 = L.circleMarker(
+                [-2.21159813333, -80.95032106667],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_14b6b821c567fbadfe5d158ebc7a91bd = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4055fd696422df031dfa60470ebad5c3 = $(`<div id="html_4055fd696422df031dfa60470ebad5c3" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 21 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">14216843</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$2,103.77</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_14b6b821c567fbadfe5d158ebc7a91bd.setContent(html_4055fd696422df031dfa60470ebad5c3);
+            
+        
+
+        circle_marker_31cfd2bf05b325effdae587ff59d7c81.bindPopup(popup_14b6b821c567fbadfe5d158ebc7a91bd)
+        ;
+
+        
+    
+    
+            circle_marker_31cfd2bf05b325effdae587ff59d7c81.bindTooltip(
+                `<div>
+                     Parada 21: POC 14216843
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_004d4b99921c5746bb188f0193dc92e2 = L.circleMarker(
+                [-2.2118954, -80.950309525],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_3ef884de04a3686ca4f64d2f0e75148c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a0391b222fa9e0483ce301e0047ad34d = $(`<div id="html_a0391b222fa9e0483ce301e0047ad34d" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 22 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13971879</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$4,248.51</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_3ef884de04a3686ca4f64d2f0e75148c.setContent(html_a0391b222fa9e0483ce301e0047ad34d);
+            
+        
+
+        circle_marker_004d4b99921c5746bb188f0193dc92e2.bindPopup(popup_3ef884de04a3686ca4f64d2f0e75148c)
+        ;
+
+        
+    
+    
+            circle_marker_004d4b99921c5746bb188f0193dc92e2.bindTooltip(
+                `<div>
+                     Parada 22: POC 13971879
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ba48604d6ef4f5a5bd63459210598bba = L.circleMarker(
+                [-2.2127829, -80.94915335],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_233a7b7c5dc5bc3f04a8355dbdf89c50 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c418fcadd9d0946bec425223da3b5638 = $(`<div id="html_c418fcadd9d0946bec425223da3b5638" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 23 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">12665973</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$2,095.37</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_233a7b7c5dc5bc3f04a8355dbdf89c50.setContent(html_c418fcadd9d0946bec425223da3b5638);
+            
+        
+
+        circle_marker_ba48604d6ef4f5a5bd63459210598bba.bindPopup(popup_233a7b7c5dc5bc3f04a8355dbdf89c50)
+        ;
+
+        
+    
+    
+            circle_marker_ba48604d6ef4f5a5bd63459210598bba.bindTooltip(
+                `<div>
+                     Parada 23: POC 12665973
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_949c67c39dd8bc80a113cd53d9b17ecd = L.circleMarker(
+                [-2.21635573333, -80.94472166667],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c084fc", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+        var popup_988d966bd04ee91789542c2323001a78 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2b52c42431a830525788131372a034c7 = $(`<div id="html_2b52c42431a830525788131372a034c7" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #c084fc; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 24 &bull; QUI                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13587578</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #c084fc; font-weight: 700;">$2,194.71</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_988d966bd04ee91789542c2323001a78.setContent(html_2b52c42431a830525788131372a034c7);
+            
+        
+
+        circle_marker_949c67c39dd8bc80a113cd53d9b17ecd.bindPopup(popup_988d966bd04ee91789542c2323001a78)
+        ;
+
+        
+    
+    
+            circle_marker_949c67c39dd8bc80a113cd53d9b17ecd.bindTooltip(
+                `<div>
+                     Parada 24: POC 13587578
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_b6212022445500e99a154f370c851752 = L.polyline(
+                [[-2.22075691726103, -80.89751406681955], [-2.2061434, -80.97223366667], [-2.205382425, -80.973114375], [-2.2048971, -80.97383253333], [-2.20026966667, -80.9806652], [-2.19821745, -80.9846482], [-2.20533233, -80.974419625], [-2.21010093333, -80.96701923333], [-2.2169869, -80.9558955], [-2.208427575, -80.9517226], [-2.2074717, -80.950450625], [-2.2059344, -80.949454825], [-2.20893666667, -80.95027233333], [-2.20904345, -80.950569825], [-2.20936013333, -80.95046733333], [-2.21121995, -80.951211675], [-2.21130215, -80.95102845], [-2.2113292, -80.9509796], [-2.21124076667, -80.9509481], [-2.211238, -80.9508605], [-2.2113568, -80.94994626667], [-2.21159813333, -80.95032106667], [-2.2118954, -80.950309525], [-2.2127829, -80.94915335], [-2.21635573333, -80.94472166667], [-2.22075691726103, -80.89751406681955]],
+                {"bubblingMouseEvents": true, "color": "#c084fc", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#c084fc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_88ccb814cb45ee5753fe9f8c3c2586e9);
+        
+    
+            poly_line_b6212022445500e99a154f370c851752.bindTooltip(
+                `<div>
+                     Circuito Otimizado: QUI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var feature_group_9c9ca7879ef52044d1588fc9e2a47714 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_5b4e25a92e4e7ae4e79e909b7a4033a0 = L.circleMarker(
+                [-2.3173571, -80.83668533333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff3366", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_9c9ca7879ef52044d1588fc9e2a47714);
+        
+    
+        var popup_7d438a642dda650c1a64683bb4fbed03 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_71c223edb29f3251d6283de3a59d0d6a = $(`<div id="html_71c223edb29f3251d6283de3a59d0d6a" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ff3366; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 1 &bull; SEX                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895919</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ff3366; font-weight: 700;">$2,143.39</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_7d438a642dda650c1a64683bb4fbed03.setContent(html_71c223edb29f3251d6283de3a59d0d6a);
+            
+        
+
+        circle_marker_5b4e25a92e4e7ae4e79e909b7a4033a0.bindPopup(popup_7d438a642dda650c1a64683bb4fbed03)
+        ;
+
+        
+    
+    
+            circle_marker_5b4e25a92e4e7ae4e79e909b7a4033a0.bindTooltip(
+                `<div>
+                     Parada 1: POC 11895919
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e209353e5b7a804e94647f434e20bb15 = L.circleMarker(
+                [-2.2911319, -80.84835773333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff3366", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_9c9ca7879ef52044d1588fc9e2a47714);
+        
+    
+        var popup_6aad401e70825a2629d5663d59f0c6bb = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_9ecb2f093ec35553341a1a91bf1b3295 = $(`<div id="html_9ecb2f093ec35553341a1a91bf1b3295" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ff3366; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 2 &bull; SEX                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11894068</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ff3366; font-weight: 700;">$2,746.48</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_6aad401e70825a2629d5663d59f0c6bb.setContent(html_9ecb2f093ec35553341a1a91bf1b3295);
+            
+        
+
+        circle_marker_e209353e5b7a804e94647f434e20bb15.bindPopup(popup_6aad401e70825a2629d5663d59f0c6bb)
+        ;
+
+        
+    
+    
+            circle_marker_e209353e5b7a804e94647f434e20bb15.bindTooltip(
+                `<div>
+                     Parada 2: POC 11894068
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0a043d4cc1cf3aa512a624027f027086 = L.circleMarker(
+                [-2.29418713333, -80.84923846667],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff3366", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_9c9ca7879ef52044d1588fc9e2a47714);
+        
+    
+        var popup_48d8479b72310978203d91dc3697324f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_31cba2f2139aeb3a5a91f8da595f7856 = $(`<div id="html_31cba2f2139aeb3a5a91f8da595f7856" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ff3366; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 3 &bull; SEX                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">14148663</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ff3366; font-weight: 700;">$3,140.17</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_48d8479b72310978203d91dc3697324f.setContent(html_31cba2f2139aeb3a5a91f8da595f7856);
+            
+        
+
+        circle_marker_0a043d4cc1cf3aa512a624027f027086.bindPopup(popup_48d8479b72310978203d91dc3697324f)
+        ;
+
+        
+    
+    
+            circle_marker_0a043d4cc1cf3aa512a624027f027086.bindTooltip(
+                `<div>
+                     Parada 3: POC 14148663
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cae6a20bc930f7ff76ebb880d0aae36d = L.circleMarker(
+                [-2.31711126667, -80.85431083333],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff3366", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_9c9ca7879ef52044d1588fc9e2a47714);
+        
+    
+        var popup_1288f61863eec8e4da1dad7d15d9af5e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0cec8eab037d9950767f516891879dd0 = $(`<div id="html_0cec8eab037d9950767f516891879dd0" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ff3366; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 4 &bull; SEX                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11895523</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ff3366; font-weight: 700;">$2,111.93</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_C</span></div>                     <div><b>Frequência:</b> 1x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_1288f61863eec8e4da1dad7d15d9af5e.setContent(html_0cec8eab037d9950767f516891879dd0);
+            
+        
+
+        circle_marker_cae6a20bc930f7ff76ebb880d0aae36d.bindPopup(popup_1288f61863eec8e4da1dad7d15d9af5e)
+        ;
+
+        
+    
+    
+            circle_marker_cae6a20bc930f7ff76ebb880d0aae36d.bindTooltip(
+                `<div>
+                     Parada 4: POC 11895523
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7c63dce2c441adce1cf916b97a0c61e7 = L.circleMarker(
+                [-2.3256475, -80.88877256667],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff3366", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_9c9ca7879ef52044d1588fc9e2a47714);
+        
+    
+        var popup_b6843e232d3512667a00cca240079a4f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f1974fa1614060257a4be05790836bc2 = $(`<div id="html_f1974fa1614060257a4be05790836bc2" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ff3366; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 5 &bull; SEX                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">11896597</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ff3366; font-weight: 700;">$15,127.77</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_A</span></div>                     <div><b>Frequência:</b> 4x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_b6843e232d3512667a00cca240079a4f.setContent(html_f1974fa1614060257a4be05790836bc2);
+            
+        
+
+        circle_marker_7c63dce2c441adce1cf916b97a0c61e7.bindPopup(popup_b6843e232d3512667a00cca240079a4f)
+        ;
+
+        
+    
+    
+            circle_marker_7c63dce2c441adce1cf916b97a0c61e7.bindTooltip(
+                `<div>
+                     Parada 5: POC 11896597
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0213e1149282fddfbed55c59de55038a = L.circleMarker(
+                [-2.32943226667, -80.8916642],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff3366", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_9c9ca7879ef52044d1588fc9e2a47714);
+        
+    
+        var popup_1d5256d7600701a3b241b813a5f39353 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_51ab668158fa5a07eca3e49bd3de49ce = $(`<div id="html_51ab668158fa5a07eca3e49bd3de49ce" style="width: 100.0%; height: 100.0%;">             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; min-width: 200px;">                 <div style="background: #ff3366; color: #000; padding: 6px 10px; border-radius: 6px 6px 0 0; font-weight: 700;">                     PARADA 6 &bull; SEX                 </div>                 <div style="padding: 10px; background: #0f172a; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 6px 6px;">                     <div style="margin-bottom: 4px;"><b>Loja / POC:</b> <span style="color: #94a3b8;">13971265</span></div>                     <div style="margin-bottom: 4px;"><b>Faturamento:</b> <span style="color: #ff3366; font-weight: 700;">$3,103.55</span></div>                     <div style="margin-bottom: 4px;"><b>Curva ABC:</b> <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">Tier_B</span></div>                     <div><b>Frequência:</b> 2x ao mês</div>                 </div>             </div>             </div>`)[0];
+                popup_1d5256d7600701a3b241b813a5f39353.setContent(html_51ab668158fa5a07eca3e49bd3de49ce);
+            
+        
+
+        circle_marker_0213e1149282fddfbed55c59de55038a.bindPopup(popup_1d5256d7600701a3b241b813a5f39353)
+        ;
+
+        
+    
+    
+            circle_marker_0213e1149282fddfbed55c59de55038a.bindTooltip(
+                `<div>
+                     Parada 6: POC 13971265
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_677930565438d6ad58765de9f9773ba9 = L.polyline(
+                [[-2.22075691726103, -80.89751406681955], [-2.3173571, -80.83668533333], [-2.2911319, -80.84835773333], [-2.29418713333, -80.84923846667], [-2.31711126667, -80.85431083333], [-2.3256475, -80.88877256667], [-2.32943226667, -80.8916642], [-2.22075691726103, -80.89751406681955]],
+                {"bubblingMouseEvents": true, "color": "#ff3366", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ff3366", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_9c9ca7879ef52044d1588fc9e2a47714);
+        
+    
+            poly_line_677930565438d6ad58765de9f9773ba9.bindTooltip(
+                `<div>
+                     Circuito Otimizado: SEX
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var layer_control_f0eab08ae0f8c2df6f3aa3e045ae6f84_layers = {
+                base_layers : {
+                    "https://server.arcgisonline.com/arcgis/rest/services/canvas/world_dark_gray_base/mapserver/tile/{z}/{y}/{x}" : tile_layer_78727e0eaf7377ba05d050d9dcc12aff,
+                },
+                overlays :  {
+                    "R\u00f3tulos de Vias" : tile_layer_e782f87538a474d91b025c8bb9743835,
+                    "Rota SEG (8 lojas)" : feature_group_95d048f7dc236bcec5eb209d86891354,
+                    "Rota TER (13 lojas)" : feature_group_43c797b70350df86dfc19a77de54c894,
+                    "Rota QUA (17 lojas)" : feature_group_629317aaa18179339ac0c0be46aa310e,
+                    "Rota QUI (24 lojas)" : feature_group_88ccb814cb45ee5753fe9f8c3c2586e9,
+                    "Rota SEX (6 lojas)" : feature_group_9c9ca7879ef52044d1588fc9e2a47714,
+                },
+            };
+            let layer_control_f0eab08ae0f8c2df6f3aa3e045ae6f84 = L.control.layers(
+                layer_control_f0eab08ae0f8c2df6f3aa3e045ae6f84_layers.base_layers,
+                layer_control_f0eab08ae0f8c2df6f3aa3e045ae6f84_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_2ee1013f702f6cedccffdae85c67292b);
+
+        
+</script>
+</html>
